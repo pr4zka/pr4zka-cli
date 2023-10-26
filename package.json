@@ -1,15 +1,24 @@
 {
   "name": "pr4zka-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.3",
+  "description": "express design pattern generator",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "module",
+  "scripts": {},
   "bin": {
-    "pr4zka": "./cli.js"
+    "pr4zka": "cli.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "express",
+    "design pattern",
+    "generator",
+    "CLI",
+    "MVC",
+    "Node.js"
+  ],
+  "author": "Ivan Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "progress": "^2.0.3"
+  }
 }
