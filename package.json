@@ -1,6 +1,6 @@
 {
   "name": "pr4zka-cli",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "description": "express design pattern generator",
   "main": "index.js",
  
