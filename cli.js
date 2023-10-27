@@ -1,8 +1,10 @@
 const { execSync } = require("child_process");
-const fs = require("fs")
-const progress = require("progress")
+const fs = require("fs");
+const progress = require("progress");
+
 const comando = process.argv[2];
-require('events').EventEmitter.defaultMaxListeners = 15
+require("events").EventEmitter.defaultMaxListeners = 15;
+
 if (comando === "mvc") {
   if (!fs.existsSync("./src")) {
     const progressBar = new progress(`${comando}: [:bar] :percent :etas`, {
@@ -24,29 +26,40 @@ if (comando === "mvc") {
 
       for (let i = 0; i < directories.length; i++) {
         const directory = directories[i];
-        await fs.promises.mkdir(directory);
-        progressBar.tick(); // Incrementa la barra de progreso
-
-        if (i === directories.length - 1) {
-          // Último directorio, escribir el archivo index.js
-          await fs.promises.writeFile(
-            `src/index.js`,
-            `
-        const express = require('express');
-        const app = express();
-        const port = 3000;
-
-        app.get('/', (req, res) => {
-          res.send('Hello World!');
-        });
-
-        app.listen(port, () => {
-          console.log(\`Server is running on http://localhost:\${port}\`);
-        });
-        `,
-            { encoding: "utf-8" }
-          );
+        try {
+          await fs.promises.mkdir(directory);
           progressBar.tick(); // Incrementa la barra de progreso
+        } catch (error) {
+          console.error(`Error al crear el directorio ${directory}:`, error);
+        }
+      }
+
+      const lastIndex = directories.length - 1;
+      if (lastIndex >= 0) {
+        // Último directorio, escribir el archivo index.js
+        const directory = directories[lastIndex];
+        const indexPath = `${directory}/index.js`;
+        const indexContent = `
+          const express = require('express');
+          const app = express();
+          const port = 3000;
+
+          app.get('/', (req, res) => {
+            res.send('Hello World!');
+          });
+
+          app.listen(port, () => {
+            console.log(\`Server is running on http://localhost:\${port}\`);
+          });
+        `;
+
+        try {
+          await fs.promises.writeFile(indexPath, indexContent, {
+            encoding: "utf-8",
+          });
+          progressBar.tick(); // Incrementa la barra de progreso
+        } catch (error) {
+          console.error(`Error al escribir el archivo ${indexPath}:`, error);
         }
       }
     };
