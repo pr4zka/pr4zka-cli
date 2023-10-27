@@ -1,9 +1,8 @@
-import { execSync } from "child_process";
-import fs from "fs";
-import progress from "progress";
-
+const { execSync } = require("child_process");
+const fs = require("fs")
+const progress = require("progress")
 const comando = process.argv[2];
-
+require('events').EventEmitter.defaultMaxListeners = 15
 if (comando === "mvc") {
   if (!fs.existsSync("./src")) {
     const progressBar = new progress(`${comando}: [:bar] :percent :etas`, {

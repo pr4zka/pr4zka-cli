@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "express design pattern generator",
   "main": "index.js",
-  "type": "module",
+ 
   "scripts": {},
   "bin": {
     "pr4zka": "cli.js"
