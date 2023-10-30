@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const { execSync } = require("child_process");
 const fs = require("fs");
 
@@ -8,7 +7,6 @@ require("events").EventEmitter.defaultMaxListeners = 15;
 
 if (comando === "mvc") {
   if (!fs.existsSync("./src")) {
-
     const createDirectories = async () => {
       const directories = [
         "./src",
@@ -23,7 +21,6 @@ if (comando === "mvc") {
         const directory = directories[i];
         try {
           await fs.promises.mkdir(directory);
-          // No hay barra de progreso
         } catch (error) {
           console.error(`Error al crear el directorio ${directory}:`, error);
         }
@@ -38,7 +35,7 @@ if (comando === "mvc") {
 
         app.get('/', (req, res) => {
           res.send('Hello World!');
-        });
+        })
 
         app.listen(port, () => {
           console.log(\`Server is running on http://localhost:\${port}\`);
@@ -49,7 +46,6 @@ if (comando === "mvc") {
         await fs.promises.writeFile(srcIndexPath, indexContent, {
           encoding: "utf-8",
         });
-        // No hay barra de progreso
       } catch (error) {
         console.error(`Error al escribir el archivo ${srcIndexPath}:`, error);
       }
